@@ -39,7 +39,7 @@ export function CarCard({ car, idx = 0 }: CarCardProps) {
         
         {/* Badges */}
         <div className="absolute top-6 left-6 flex gap-2 z-10">
-          <span className="bg-white/80 backdrop-blur-md border border-black/5 px-4 py-1.5 text-[10px] tracking-widest uppercase text-black font-bold rounded-full shadow-sm">
+          <span className="bg-white/80 backdrop-blur-md border border-black/5 px-4 py-1.5 text-[10px] tracking-widest uppercase text-black font-light rounded-full shadow-sm">
             {car.condition}
           </span>
         </div>
@@ -47,28 +47,28 @@ export function CarCard({ car, idx = 0 }: CarCardProps) {
 
       <div className="p-8 flex flex-col flex-1 justify-between">
         <div>
-          <span className="text-apple-blue text-[10px] uppercase tracking-widest font-bold block mb-2">{car.make} • {car.year}</span>
-          <h3 className="font-bold text-2xl md:text-3xl tracking-tight text-black leading-none mb-8">{car.model}</h3>
+          <span className="text-apple-blue text-[10px] uppercase tracking-widest font-light block mb-2">{car.make} • {car.year}</span>
+          <h3 className="font-light text-2xl md:text-3xl tracking-tight text-black leading-none mb-8">{car.model}</h3>
 
           <div className="space-y-4 mb-8 border-b border-black/5 pb-8">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-gray-400 uppercase tracking-widest text-[9px] font-bold">Mileage</span>
-              <span className="text-black font-bold">{car.mileage.toLocaleString()} km</span>
+              <span className="text-gray-400 uppercase tracking-widest text-[9px] font-normal">Mileage</span>
+              <span className="text-black font-light">{car.mileage.toLocaleString()} km</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span className="text-gray-400 uppercase tracking-widest text-[9px] font-bold">Engine</span>
-              <span className="text-black font-bold">{car.engine}</span>
+              <span className="text-gray-400 uppercase tracking-widest text-[9px] font-normal">Engine</span>
+              <span className="text-black font-light">{car.engine}</span>
             </div>
           </div>
         </div>
 
         <div className="mt-auto flex justify-between items-center">
-          <span className="text-2xl text-apple-blue font-bold tracking-tighter leading-none">
+          <span className="text-2xl text-apple-blue font-light tracking-tighter leading-none">
             {formatNaira(car.priceNaira)}
           </span>
           <Link
             href={`/inventory/${car.id}`}
-            className="text-[10px] uppercase tracking-widest bg-black/5 hover:bg-apple-blue text-black hover:text-white px-5 py-2.5 rounded-full font-bold transition-all"
+            className="text-[10px] uppercase tracking-widest bg-black/5 hover:bg-apple-blue text-black hover:text-white px-5 py-2.5 rounded-full font-light transition-all"
           >
             Explore
           </Link>

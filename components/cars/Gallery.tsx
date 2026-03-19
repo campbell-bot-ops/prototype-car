@@ -24,9 +24,9 @@ export function Gallery({ images }: { images: string[] }) {
     <div className="flex flex-col gap-6">
       {/* View Mode Controls */}
       <div className="flex flex-wrap shadow-none border-none justify-center gap-2 md:gap-4 pb-2">
-         <button onClick={() => setViewMode("photos")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all ${viewMode === 'photos' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}>Photos</button>
-         <button onClick={() => setViewMode("video")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-2 transition-all ${viewMode === 'video' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}><Play size={12}/> Video Walkaround</button>
-         <button onClick={() => setViewMode("360")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-2 transition-all ${viewMode === '360' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}><Rotate3D size={14}/> 360° Studio</button>
+         <button onClick={() => setViewMode("photos")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-normal tracking-widest uppercase transition-all ${viewMode === 'photos' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}>Photos</button>
+         <button onClick={() => setViewMode("video")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-normal tracking-widest uppercase flex items-center gap-2 transition-all ${viewMode === 'video' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}><Play size={12}/> Video Walkaround</button>
+         <button onClick={() => setViewMode("360")} className={`px-6 py-3 rounded-full text-[10px] md:text-xs font-normal tracking-widest uppercase flex items-center gap-2 transition-all ${viewMode === '360' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white border border-white/5'}`}><Rotate3D size={14}/> 360° Studio</button>
       </div>
 
       {/* Main Cinematic Viewer */}
@@ -59,7 +59,7 @@ export function Gallery({ images }: { images: string[] }) {
              {/* Expand Icon */}
              <button onClick={() => setSelectedIndex(inlineIndex)} className="absolute bottom-6 right-6 px-4 py-2 rounded-full bg-black/40 text-white backdrop-blur-md opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-white/20 flex items-center gap-2 shadow-lg">
                <Maximize size={14} />
-               <span className="text-[10px] uppercase tracking-widest font-bold">Expand</span>
+               <span className="text-[10px] uppercase tracking-widest font-light">Expand</span>
              </button>
 
              {/* Image Indicators */}
@@ -82,7 +82,7 @@ export function Gallery({ images }: { images: string[] }) {
                <div className="w-24 h-24 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center mb-6 cursor-pointer hover:scale-110 hover:bg-white/10 transition-all">
                  <Play size={32} className="text-white ml-2 opacity-90" />
                </div>
-               <p className="text-white/60 font-bold tracking-widest uppercase text-xs">Play Cinematic Feature</p>
+               <p className="text-white/60 font-light tracking-widest uppercase text-xs">Play Cinematic Feature</p>
                <span className="text-[10px] text-white/30 tracking-widest mt-2 uppercase">Video available upon formal inquiry</span>
             </div>
          )}
@@ -90,7 +90,7 @@ export function Gallery({ images }: { images: string[] }) {
          {viewMode === "360" && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] cursor-grab active:cursor-grabbing">
                <Rotate3D size={64} className="text-white/20 mb-6" />
-               <p className="text-white/60 font-bold tracking-widest uppercase text-xs">Drag to rotate exterior</p>
+               <p className="text-white/60 font-light tracking-widest uppercase text-xs">Drag to rotate exterior</p>
                <div className="flex gap-2 mt-6">
                  <span className="w-2 h-2 rounded-full bg-apple-blue animate-pulse" />
                  <span className="w-2 h-2 rounded-full bg-apple-blue/50 animate-pulse delay-75" />

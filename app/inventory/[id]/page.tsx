@@ -29,21 +29,21 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#f5f5f7] pb-24">
+    <div className="min-h-screen bg-black text-[#f5f5f7] pb-24 overflow-x-hidden">
       {/* Apple Pro Immersive Dark Header */}
       <div className="relative h-[100dvh] min-h-[700px] w-full flex flex-col items-center justify-start pt-32 overflow-hidden mb-16 border-b-8 border-white/10">
         <div className="relative z-20 flex flex-col items-center text-center px-6">
-          <h2 className="text-apple-blue font-semibold tracking-widest uppercase text-xs md:text-sm mb-4">
+          <h2 className="text-apple-blue font-normal tracking-widest uppercase text-xs md:text-sm mb-4">
             {car.make} • {car.year}
           </h2>
-          <h1 className="text-5xl sm:text-6xl md:text-[100px] font-bold tracking-tighter text-white mb-4 md:mb-6 leading-none px-4">
+          <h1 className="text-4xl sm:text-6xl md:text-[100px] font-light tracking-tighter text-white mb-4 md:mb-6 leading-none px-4 break-words max-w-full">
             {car.model}
           </h1>
-          <p className="text-base sm:text-lg md:text-3xl font-medium text-[#86868b] max-w-2xl mb-8 px-4">
+          <p className="text-base sm:text-lg md:text-3xl font-light text-[#86868b] max-w-2xl mb-8 px-4">
             {car.condition}. {car.engine}. Absolute Power.
           </p>
-          <div className="flex gap-4 mt-2 mb-4">
-            <span className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-apple-blue drop-shadow-md">{formatNaira(car.priceNaira)}</span>
+          <div className="flex gap-4 mt-2 mb-4 max-w-full overflow-hidden">
+            <span className="text-2xl sm:text-4xl md:text-5xl font-light tracking-tight text-apple-blue drop-shadow-md truncate">{formatNaira(car.priceNaira)}</span>
           </div>
           <div className="mt-8 z-30">
             <AudioIgnition engineName={car.engine} />

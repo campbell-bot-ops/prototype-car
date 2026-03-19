@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans tracking-tight">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans font-light tracking-tight">
         <Navbar />
         <StudioLightingToggle />
         <main className="flex-1">

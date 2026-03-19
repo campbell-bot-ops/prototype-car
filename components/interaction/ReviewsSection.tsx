@@ -42,12 +42,12 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
           <Star className="text-apple-blue" size={36} fill="currentColor" />
         </div>
         <div className="text-center md:text-left">
-          <h3 className="font-bold text-3xl md:text-[40px] text-white tracking-tighter mb-2">Verified Client Reviews</h3>
+          <h3 className="font-light text-3xl md:text-[40px] text-white tracking-tighter mb-2">Verified Client Reviews</h3>
           <div className="flex flex-col md:flex-row items-center gap-3">
              <div className="flex items-center gap-1 text-apple-blue">
                {[1,2,3,4,5].map(star => <Star key={star} size={18} fill="currentColor" className={parseFloat(averageRating) >= star ? 'opacity-100' : parseFloat(averageRating) >= star - 0.5 ? 'opacity-50' : 'opacity-20'} />)}
              </div>
-             <span className="text-xs font-bold tracking-widest text-[#86868b] mt-1 md:mt-0">{averageRating} OUT OF 5.0 • {reviews.length} REVIEW{reviews.length !== 1 && 'S'}</span>
+             <span className="text-xs font-normal tracking-widest text-[#86868b] mt-1 md:mt-0">{averageRating} OUT OF 5.0 • {reviews.length} REVIEW{reviews.length !== 1 && 'S'}</span>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
           {reviews.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-12 bg-white/5 rounded-3xl border border-white/10 border-dashed">
               <Star className="text-white/20 mb-4" size={48} />
-              <p className="text-[#86868b] font-medium tracking-wide">No reviews yet. Be the first to review this stunning vehicle.</p>
+              <p className="text-[#86868b] font-light tracking-wide">No reviews yet. Be the first to review this stunning vehicle.</p>
             </div>
           ) : (
              <div className="space-y-6">
@@ -74,19 +74,19 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
                      <div className="flex justify-between items-start mb-4">
                        <div>
                          <div className="flex items-center gap-2 mb-2">
-                           <span className="font-bold text-white text-sm uppercase tracking-widest">{rev.author}</span>
+                           <span className="font-light text-white text-sm uppercase tracking-widest">{rev.author}</span>
                          </div>
                          <div className="flex text-apple-blue">
                            {[1,2,3,4,5].map(star => <Star key={`rev-${rev.id}-${star}`} size={12} fill="currentColor" className={rev.rating >= star ? 'opacity-100' : 'opacity-20'} />)}
                          </div>
                        </div>
-                       <span className="text-xs text-[#86868b] font-medium tracking-tight">
+                       <span className="text-xs text-[#86868b] font-light tracking-tight">
                          {new Date(rev.date).toLocaleDateString('en-NG', {
                            year: 'numeric', month: 'short', day: 'numeric'
                          })}
                        </span>
                      </div>
-                     <p className="text-white/80 text-[15px] leading-relaxed font-medium">{rev.text}</p>
+                     <p className="text-white/80 text-[15px] leading-relaxed font-light">{rev.text}</p>
                    </motion.div>
                  ))}
                </AnimatePresence>
@@ -97,11 +97,11 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
         {/* Post a Review Form */}
         <div className="w-full mt-8">
           <form onSubmit={handleSubmit} className="bg-[#0a0a0a] p-8 md:p-12 border border-white/10 rounded-[32px] shadow-2xl">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#86868b] mb-8">Leave a Review</h4>
+            <h4 className="text-xs font-light uppercase tracking-widest text-[#86868b] mb-8">Leave a Review</h4>
             
             <div className="space-y-6">
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-3 font-bold">Overall Rating</label>
+                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-3 font-light">Overall Rating</label>
                 <div className="flex gap-2" onMouseLeave={() => setHoverRating(0)}>
                   {[1,2,3,4,5].map(star => (
                     <button 
@@ -120,7 +120,7 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
               <div className="w-full h-[1px] bg-white/5 my-6" />
 
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2 font-bold">Purchaser Name</label>
+                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2 font-light">Purchaser Name</label>
                 <input 
                   type="text" 
                   value={authorName}
@@ -132,7 +132,7 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
               </div>
               
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2 font-bold">Review Message</label>
+                <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2 font-light">Review Message</label>
                 <textarea 
                   value={newReview}
                   onChange={(e) => setNewReview(e.target.value)}
@@ -145,7 +145,7 @@ export function ReviewsSection({ initialReviews }: ReviewsSectionProps) {
               
               <button 
                 type="submit"
-                className="w-full bg-apple-blue text-white py-4 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-[#2986e6] shadow-[0_4_20px_rgba(41,151,255,0.4)] transition-all flex items-center justify-center gap-2 mt-2"
+                className="w-full bg-apple-blue text-white py-4 rounded-full text-[11px] font-light uppercase tracking-widest hover:bg-[#2986e6] shadow-[0_4_20px_rgba(41,151,255,0.4)] transition-all flex items-center justify-center gap-2 mt-2"
               >
                 Post Review <CheckCircle2 size={16} />
               </button>

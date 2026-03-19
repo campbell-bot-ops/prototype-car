@@ -12,16 +12,16 @@ export default function ClientVDP({ car }: { car: Car }) {
   return (
     <div className="sticky top-28 space-y-8">
       <div className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-md">
-        <h4 className="font-semibold text-xl md:text-2xl text-white mb-6">Acquire This Vehicle</h4>
+        <h4 className="font-normal text-xl md:text-2xl text-white mb-6">Acquire This Vehicle</h4>
         <button 
           onClick={() => setIsBookingOpen(true)}
-          className="w-full bg-apple-blue text-white rounded-full py-3 md:py-4 text-xs md:text-sm font-bold uppercase tracking-widest shadow-lg hover:bg-apple-blue-hover transition-colors mb-4"
+          className="w-full bg-apple-blue text-white rounded-full py-3 md:py-4 text-xs md:text-sm font-light uppercase tracking-widest shadow-lg hover:bg-apple-blue-hover transition-colors mb-4"
         >
           Book Physical Inspection
         </button>
         <button 
           onClick={() => setIsBookingOpen(true)}
-          className="w-full bg-transparent border border-white/20 text-white rounded-full py-3 md:py-4 text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+          className="w-full bg-transparent border border-white/20 text-white rounded-full py-3 md:py-4 text-xs md:text-sm font-light uppercase tracking-widest hover:bg-white/10 transition-colors"
         >
           Schedule Virtual Tour
         </button>

@@ -26,7 +26,7 @@ export function AudioIgnition({ engineName = "V12" }: { engineName?: string }) {
       <audio ref={audioRef} preload="auto" src="/freesound_community-car-engine-revving-94831.mp3" />
       <button 
         onClick={startIgnition}
-        className={`flex items-center gap-3 backdrop-blur-md px-6 py-3 rounded-full border transition-all font-bold tracking-widest text-xs uppercase ${
+        className={`flex items-center gap-3 backdrop-blur-md px-6 py-3 rounded-full border transition-all font-light tracking-widest text-xs uppercase ${
           isPlaying 
             ? 'border-apple-blue bg-apple-blue text-white shadow-[0_0_50px_rgba(41,151,255,0.8)] animate-pulse' 
             : 'border-white/20 bg-black/40 text-white hover:border-white/50 hover:bg-white/10'

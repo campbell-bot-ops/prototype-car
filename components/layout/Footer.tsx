@@ -8,17 +8,17 @@ export function Footer() {
     <footer className="bg-surface border-t border-border mt-auto pt-16 pb-8" id="contact">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-          <h2 className="font-serif text-2xl uppercase tracking-widest text-foreground mb-6">
+          <h2 className="font-serif text-2xl uppercase tracking-widest text-foreground mb-6 font-light">
             Vanguard
           </h2>
-          <p className="text-muted text-sm leading-relaxed max-w-sm">
+          <p className="text-muted text-sm leading-relaxed max-w-sm font-light">
             Curating excellence. We provide the most exclusive and meticulously inspected exotic vehicles for the elite in Lagos, Nigeria.
           </p>
         </div>
         
         <div>
-          <h3 className="font-serif text-apple-blue mb-6 uppercase tracking-wider text-sm">Contact</h3>
-          <ul className="space-y-4 text-sm tracking-wide text-muted">
+          <h3 className="font-serif text-apple-blue mb-6 uppercase tracking-wider text-sm font-light">Contact</h3>
+          <ul className="space-y-4 text-sm tracking-wide text-muted font-light">
             <li className="flex items-center gap-3">
               <MapPin size={16} className="text-apple-blue" />
               15 Victoria Island Drive, Lagos
@@ -35,8 +35,8 @@ export function Footer() {
         </div>
         
         <div>
-          <h3 className="font-serif text-apple-blue mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
-          <ul className="space-y-4 text-sm tracking-wide text-muted flex flex-col">
+          <h3 className="font-serif text-apple-blue mb-6 uppercase tracking-wider text-sm font-light">Quick Links</h3>
+          <ul className="space-y-4 text-sm tracking-wide text-muted flex flex-col font-light">
             <Link href="/inventory" className="hover:text-foreground transition-colors w-fit">Vehicles</Link>
             <Link href="/compare" className="hover:text-foreground transition-colors w-fit">Compare Models</Link>
             <Link href="/configure" className="hover:text-foreground transition-colors w-fit">Configure</Link>

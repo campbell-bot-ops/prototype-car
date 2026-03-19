@@ -27,7 +27,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-white tracking-widest font-semibold text-sm md:text-lg uppercase mb-4"
+          className="text-white tracking-widest font-normal text-sm md:text-lg uppercase mb-4"
         >
           Vanguard Exotics
         </motion.h2>
@@ -36,7 +36,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-[100px] lg:text-[140px] leading-none font-bold text-white tracking-tighter mb-6"
+          className="text-5xl sm:text-6xl md:text-[100px] lg:text-[140px] leading-none font-light text-white tracking-tighter mb-6"
         >
           Curating Excellence.
         </motion.h1>
@@ -45,7 +45,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-base sm:text-lg md:text-2xl text-white/90 font-medium mb-10 max-w-2xl leading-snug px-4"
+          className="text-base sm:text-lg md:text-2xl text-white/90 font-light mb-10 max-w-2xl leading-snug px-4"
         >
           An elite selection of the world&apos;s most prestigious vehicles.
         </motion.p>
@@ -59,14 +59,14 @@ export function Hero() {
         >
           <Link 
             href="/inventory" 
-            className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-semibold text-[15px] md:text-[17px] hover:bg-white/90 transition-colors text-center"
+            className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-light text-[15px] md:text-[17px] hover:bg-white/90 transition-colors text-center"
           >
             Explore Collection
           </Link>
           
           <Link 
             href="#hook" 
-            className="w-full sm:w-auto px-8 py-4 bg-black/40 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold text-[15px] md:text-[17px] hover:bg-black/60 transition-colors text-center"
+            className="w-full sm:w-auto px-8 py-4 bg-black/40 backdrop-blur-md border border-white/20 text-white rounded-full font-light text-[15px] md:text-[17px] hover:bg-black/60 transition-colors text-center"
           >
             The Vanguard Experience
           </Link>
