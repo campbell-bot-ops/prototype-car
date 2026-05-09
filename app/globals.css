@@ -55,17 +55,11 @@ html.studio-lights img, html.studio-lights video {
   animation-iteration-count: infinite;
 }
 
-/* Custom scrollbar for an elegant feel */
+/* Hide scrollbars completely for a seamless, clean aesthetic */
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

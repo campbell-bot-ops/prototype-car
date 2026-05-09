@@ -2,6 +2,24 @@ import { Car } from './types';
 
 export const mockCars: Car[] = [
   {
+    id: "c-007",
+    make: "Mercedes-Benz",
+    model: "GLC300",
+    year: 2024,
+    priceNaira: 150000000,
+    mileage: 150,
+    condition: "Brand New",
+    engine: "2.0L Inline-4 Turbo",
+    transmission: "9-Speed Automatic",
+    keyFeatures: ["MBUX Infotainment System", "Panoramic Sunroof", "Burmester Surround Sound"],
+    images: [
+      "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287162/imagem_mnsdmd.png",
+      "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287163/imagem2_orx6jh.png",
+      "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287347/imagem3_j7ywf2.png"
+    ],
+    reviews: []
+  },
+  {
     id: "c-001",
     make: "Rolls-Royce",
     model: "Cullinan Black Badge",

@@ -4,6 +4,7 @@ import { VDPExtensiveSpecs } from "@/components/cars/VDPExtensiveSpecs";
 import { AudioIgnition } from "@/components/interaction/AudioIgnition";
 import Image from "next/image";
 import ClientVDP from "./ClientVDP";
+import { ParallaxHeroBackground } from "@/components/interaction/ParallaxHeroBackground";
 
 // Generate static params for mock data
 export function generateStaticParams() {
@@ -50,8 +51,8 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
 
-        {/* The Immersive Full Bleed Car Image appearing out of the dark */}
-        <div className="absolute bottom-0 w-full h-[70vh] md:h-[80vh] max-w-[1600px] mx-auto overflow-hidden">
+        {/* The Immersive Full Bleed Car Image with Parallax */}
+        <ParallaxHeroBackground>
           <Image 
             src={car.images[0]} 
             alt={car.model} 
@@ -62,7 +63,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-transparent" />
-        </div>
+        </ParallaxHeroBackground>
       </div>
 
       <div className="max-w-7xl mx-auto px-6">

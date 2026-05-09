@@ -3,23 +3,24 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ParallaxHeroBackground } from "@/components/interaction/ParallaxHeroBackground";
 
 export function Hero() {
   return (
     <section className="relative w-full h-[100dvh] flex flex-col items-center justify-center pt-20 px-4 md:px-6 overflow-hidden bg-black">
-      {/* Full Screen Cinematic Image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1920&q=80" 
-          alt="Exotic Car"
-          fill 
-          sizes="100vw"
-          priority
-          className="object-cover object-center opacity-80"
+      {/* Full Screen Cinematic Video with Parallax */}
+      <ParallaxHeroBackground>
+        <video 
+          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/pplp_eyxyep.mp4"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full h-full object-cover object-center opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/60" />
-      </div>
+        {/* Dark overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-black/40" />
+      </ParallaxHeroBackground>
 
       {/* Hero Content Overlaid */}
       <div className="relative z-20 flex flex-col items-center text-center max-w-5xl mx-auto w-full mt-auto mb-12 md:mb-24">

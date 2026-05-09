@@ -18,44 +18,45 @@ export function VDPExtensiveSpecs({ car }: { car: Car }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={t}
-        className="flex flex-col gap-6 md:gap-8"
+        className="flex flex-col gap-6 md:gap-10"
       >
+        <div className="border-t border-white/20 w-12 mb-2 md:mb-6" />
         <motion.h3 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.1}}
-          className="font-light text-3xl md:text-6xl xl:text-[80px] leading-none text-white tracking-tighter"
+          className="font-light text-[40px] sm:text-5xl md:text-7xl xl:text-[90px] leading-[0.95] text-white tracking-tighter"
         >
-          Engineered for <br/> <span className="text-apple-blue">pure adrenaline.</span>
+          Engineered for <br/> <span className="text-white/40">pure adrenaline.</span>
         </motion.h3>
         <motion.p 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.2}}
-          className="text-xl md:text-3xl text-[#86868b] font-light max-w-2xl leading-snug tracking-tight px-1"
+          className="text-lg sm:text-xl md:text-3xl text-[#86868b] font-light max-w-2xl leading-relaxed tracking-tight px-1 mt-4 md:mt-0"
         >
           The {car.model} is built around a devastatingly powerful {car.engine}, paired flawlessly with a {car.transmission}. It doesn&apos;t just drive; it dominates.
         </motion.p>
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{...t, duration: 1.2}}
-          className="relative w-full h-[400px] md:h-[700px] rounded-[32px] md:rounded-[40px] overflow-hidden mt-6 md:mt-10 bg-white/5 border border-white/10"
+          className="relative w-full h-[300px] sm:h-[400px] md:h-[700px] rounded-[24px] md:rounded-[40px] overflow-hidden mt-8 md:mt-12 bg-white/5 border border-white/10"
         >
           <Image src={car.images[1] || car.images[0]} alt="Engine details" fill sizes="(max-width: 1200px) 100vw, 50vw" className="object-cover opacity-80" />
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.2}}
-            className="bg-white/5 border border-white/10 rounded-[32px] p-8 md:p-10 backdrop-blur-md"
+            className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-6 sm:p-8 md:p-10 backdrop-blur-md"
           >
-            <Gauge className="text-apple-blue mb-6" size={32} />
-            <span className="block text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Powertrain</span>
-            <span className="text-xl sm:text-2xl md:text-4xl font-light tracking-tight text-white">{car.engine}</span>
+            <Gauge className="text-white mb-6" size={24} />
+            <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Powertrain</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white">{car.engine}</span>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.3}}
-            className="bg-white/5 border border-white/10 rounded-[32px] p-8 md:p-10 backdrop-blur-md"
+            className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-6 sm:p-8 md:p-10 backdrop-blur-md"
           >
-            <Settings className="text-apple-blue mb-6" size={32} />
-            <span className="block text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Transmission</span>
-            <span className="text-xl sm:text-2xl md:text-4xl font-light tracking-tight text-white">{car.transmission}</span>
+            <Settings className="text-white mb-6" size={24} />
+            <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Transmission</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white">{car.transmission}</span>
           </motion.div>
         </div>
       </motion.div>
@@ -63,29 +64,30 @@ export function VDPExtensiveSpecs({ car }: { car: Car }) {
       {/* Bespoke Features Section */}
       <motion.div 
         initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={t}
-        className="flex flex-col gap-6 md:gap-8"
+        className="flex flex-col gap-6 md:gap-10 mt-12 md:mt-24"
       >
+        <div className="border-t border-white/20 w-12 mb-2 md:mb-6" />
         <motion.h3 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.1}}
-          className="font-light text-[40px] md:text-6xl xl:text-[80px] leading-none text-white tracking-tighter"
+          className="font-light text-[40px] sm:text-5xl md:text-7xl xl:text-[90px] leading-[0.95] text-white tracking-tighter"
         >
           Bespoke to your <br/> <span className="text-[#86868b]">exact identity.</span>
         </motion.h3>
         <motion.p 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.2}}
-          className="text-xl md:text-3xl text-[#86868b] font-light max-w-2xl leading-snug tracking-tight px-1"
+          className="text-lg sm:text-xl md:text-3xl text-[#86868b] font-light max-w-2xl leading-relaxed tracking-tight px-1 mt-4 md:mt-0"
         >
           Every detail inside the cabin is meticulously crafted. From the stitching to the finest leather, the Vanguard standard ensures uncompromising luxury.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-8 md:mt-12">
           {car.keyFeatures.map((feature, idx) => (
             <motion.div 
               key={idx} 
               initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{...t, delay: 0.1 * idx}}
-              className="bg-white/5 border border-white/10 rounded-[32px] p-8 md:p-12 flex flex-col justify-center items-center text-center min-h-[200px] hover:bg-white/10 transition-colors"
+              className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-8 flex flex-col justify-center items-center text-center min-h-[160px] md:min-h-[200px] hover:bg-white/10 transition-colors"
             >
-              <span className="text-lg md:text-3xl font-light text-white tracking-tight leading-snug">{feature}</span>
+              <span className="text-base sm:text-lg md:text-2xl font-light text-white tracking-tight leading-relaxed">{feature}</span>
             </motion.div>
           ))}
         </div>
@@ -94,9 +96,9 @@ export function VDPExtensiveSpecs({ car }: { car: Car }) {
       {/* Condition & History Section */}
       <motion.div 
         initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={t}
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-8 mt-12 md:mt-24"
       >
-        <div className="p-10 md:p-16 bg-apple-blue rounded-[32px] md:rounded-[40px] text-white flex flex-col md:flex-row items-center justify-between gap-12 overflow-hidden relative">
+        <div className="p-8 sm:p-10 md:p-16 bg-white/5 border border-white/10 rounded-[24px] md:rounded-[40px] text-white flex flex-col xl:flex-row items-center justify-between gap-12 overflow-hidden relative backdrop-blur-md">
           <div className="absolute inset-0 bg-white/10 mix-blend-overlay pointer-events-none" />
           <div className="flex-1 relative z-10 w-full flex flex-col items-center md:items-start">
             <div className="md:hidden mb-6">
