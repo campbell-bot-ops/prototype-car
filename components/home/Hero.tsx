@@ -11,7 +11,7 @@ export function Hero() {
       {/* Full Screen Cinematic Video with Parallax */}
       <ParallaxHeroBackground>
         <video 
-          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/pplp_eyxyep.mp4"
+          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4"
           autoPlay 
           loop 
           muted 
