@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play, Maximize, Rotate3D } from "lucide-react";
 
-export function Gallery({ images }: { images: string[] }) {
+export function Gallery({ images, video }: { images: string[]; video?: string }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<"photos" | "360" | "video">("photos");
   const [inlineIndex, setInlineIndex] = useState(0);
@@ -94,15 +94,36 @@ export function Gallery({ images }: { images: string[] }) {
          )}
 
          {viewMode === "video" && (
-            <div className="absolute inset-0 bg-black">
-               <iframe
-                 src="https://player.cloudinary.com/embed/?cloud_name=ddm5ca6u8&public_id=pplp_eyxyep&fluid=true&autoplay=true&loop=true&controls=true&muted=true"
-                 className="w-full h-full border-none"
-                 allow="autoplay; fullscreen"
-                 allowFullScreen
-               />
-            </div>
-         )}
+             <div className="absolute inset-0 bg-black">
+                {video ? (
+                  video.includes("embed") || video.includes("player.cloudinary.com") ? (
+                    <iframe
+                      src={video}
+                      className="w-full h-full border-none"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      src={video}
+                      autoPlay
+                      loop
+                      muted
+                      controls
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  )
+                ) : (
+                  <iframe
+                    src="https://player.cloudinary.com/embed/?cloud_name=ddm5ca6u8&public_id=pplp_eyxyep&fluid=true&autoplay=true&loop=true&controls=true&muted=true"
+                    className="w-full h-full border-none"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  />
+                )}
+             </div>
+          )}
          
          {viewMode === "360" && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] cursor-grab active:cursor-grabbing">

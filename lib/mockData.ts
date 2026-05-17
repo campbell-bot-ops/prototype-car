@@ -17,7 +17,29 @@ export const mockCars: Car[] = [
       "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287163/imagem2_orx6jh.png",
       "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287347/imagem3_j7ywf2.png"
     ],
+    video: "https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4",
     reviews: []
+  },
+  {
+    id: "c-008",
+    make: "Jeep",
+    model: "Cherokee Pioneer (Chrysler)",
+    year: 1989,
+    priceNaira: 55000000,
+    mileage: 42500,
+    condition: "Tokunbo",
+    engine: "4.0L PowerTech Inline-6",
+    transmission: "4-Speed Automatic",
+    keyFeatures: ["Heritage Plaid Interior", "Selec-Trac 4WD System", "Restored Vintage Wood-Grain Panel", "Retro-Modern Bluetooth Audio", "Chrome Exterior Accent Package"],
+    images: [
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1200&q=80",
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=80",
+      "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?w=1200&q=80"
+    ],
+    video: "https://res.cloudinary.com/ddm5ca6u8/video/upload/jeep_dgk4g9.mp4",
+    reviews: [
+      { id: "cm-005", author: "Alhaji Bello", text: "A nostalgic masterpiece. The restoration quality of the wood-grain dash and Selec-Trac system is pristine.", date: "2024-05-15T10:45:00Z", rating: 5 }
+    ]
   },
   {
     id: "c-001",

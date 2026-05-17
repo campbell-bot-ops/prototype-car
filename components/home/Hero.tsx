@@ -2,77 +2,101 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { ParallaxHeroBackground } from "@/components/interaction/ParallaxHeroBackground";
+import { ChevronDown } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative w-full h-[100dvh] flex flex-col items-center justify-center pt-20 px-4 md:px-6 overflow-hidden bg-black">
-      {/* Full Screen Cinematic Video with Parallax */}
+    <section className="relative w-full h-[100dvh] overflow-hidden bg-black">
+      {/* Full-Bleed Cinematic Video — THE CAR IS THE STAR */}
       <ParallaxHeroBackground>
         <video 
-          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4"
+          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/jeep_dgk4g9.mp4"
           autoPlay 
           loop 
           muted 
           playsInline
-          className="w-full h-full object-cover object-center opacity-70"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Dark overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Cinematic bottom gradient for text readability — minimal, keeps video vivid */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        {/* Subtle top vignette for navbar breathing room */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent h-[30%]" />
       </ParallaxHeroBackground>
 
-      {/* Hero Content Overlaid */}
-      <div className="relative z-20 flex flex-col items-center text-center max-w-5xl mx-auto w-full mt-auto mb-12 md:mb-24">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-white tracking-widest font-normal text-sm md:text-lg uppercase mb-4"
-        >
-          Vanguard Exotics
-        </motion.h2>
-        
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-[100px] lg:text-[140px] leading-none font-light text-white tracking-tighter mb-6"
-        >
-          Curating Excellence.
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-base sm:text-lg md:text-2xl text-white/90 font-light mb-10 max-w-2xl leading-snug px-4"
-        >
-          An elite selection of the world&apos;s most prestigious vehicles.
-        </motion.p>
-        
-        {/* Buttons: flex-col on mobile, flex-row on larger screens */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto px-4"
-        >
-          <Link 
-            href="/inventory" 
-            className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-light text-[15px] md:text-[17px] hover:bg-white/90 transition-colors text-center"
-          >
-            Explore Collection
-          </Link>
+      {/* Bottom-Anchored Content — like Porsche/Lamborghini/BMW */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 px-6 md:px-12 lg:px-20 pb-12 md:pb-16">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           
-          <Link 
-            href="#hook" 
-            className="w-full sm:w-auto px-8 py-4 bg-black/40 backdrop-blur-md border border-white/20 text-white rounded-full font-light text-[15px] md:text-[17px] hover:bg-black/60 transition-colors text-center"
+          {/* Left: Headline Block */}
+          <div className="flex flex-col">
+            <motion.span
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-white/50 text-[10px] md:text-xs font-medium tracking-[0.35em] uppercase mb-3"
+            >
+              The New Standard
+            </motion.span>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white text-[42px] sm:text-6xl md:text-7xl lg:text-[88px] font-semibold leading-[0.95] tracking-tight"
+            >
+              Vanguard<br />Exotics.
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+              className="text-white/60 text-sm md:text-base font-light mt-4 max-w-md leading-relaxed"
+            >
+              Curating the world&apos;s most exceptional vehicles. 
+              Precision-sourced. Impeccably delivered.
+            </motion.p>
+          </div>
+
+          {/* Right: CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="flex flex-row gap-3 items-center"
           >
-            The Vanguard Experience
-          </Link>
-        </motion.div>
+            <Link 
+              href="/inventory" 
+              className="px-7 py-3.5 bg-white text-black rounded-sm font-medium text-sm tracking-wide hover:bg-white/90 transition-all duration-300 text-center uppercase"
+            >
+              Explore Models
+            </Link>
+            
+            <Link 
+              href="#hook" 
+              className="px-7 py-3.5 border border-white/30 text-white rounded-sm font-medium text-sm tracking-wide hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-center uppercase"
+            >
+              Our Story
+            </Link>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Subtle scroll indicator — a simple animated chevron */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden md:flex"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown size={20} className="text-white/30" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

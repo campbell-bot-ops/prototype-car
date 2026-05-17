@@ -70,7 +70,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         
         {/* Gallery */}
         <div className="mb-16">
-          <Gallery images={car.images} />
+          <Gallery images={car.images} video={car.video} />
         </div>
 
         <div className="flex flex-col xl:grid xl:grid-cols-3 gap-16">

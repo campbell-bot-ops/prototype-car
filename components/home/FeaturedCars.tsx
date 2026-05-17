@@ -32,7 +32,12 @@ export function FeaturedCars({ cars }: { cars: Car[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...transition, delay: 0.1 }}
-                className={`font-bold text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-none tracking-tight mb-4 ${textColor}`}
+                className={`font-bold text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-none tracking-tight mb-4 bg-gradient-to-b ${
+                  car.id === "c-007" ? "from-[#0f172a] via-[#334155] to-[#64748b]" : // GLC300
+                  car.id === "c-008" ? "from-[#fef08a] via-[#f59e0b] to-[#ca8a04]" : // Jeep Pioneer
+                  car.id === "c-001" ? "from-[#1e293b] via-[#475569] to-[#64748b]" : // Cullinan
+                  isDark ? "from-white via-white/90 to-white/70" : "from-[#1d1d1f] via-[#1d1d1f]/90 to-[#1d1d1f]/70"
+                } bg-clip-text text-transparent`}
               >
                 {car.make} <br className="md:hidden" /> {car.model}
               </motion.h2>
@@ -41,10 +46,35 @@ export function FeaturedCars({ cars }: { cars: Car[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...transition, delay: 0.2 }}
-                className={`text-base sm:text-lg md:text-3xl font-medium tracking-tight mb-8 px-4 ${subTextColor}`}
+                className={`text-base sm:text-lg md:text-3xl font-medium tracking-tight mb-6 px-4 ${subTextColor}`}
               >
                 {car.keyFeatures[0] || 'Unparalleled luxury and performance.'}
               </motion.p>
+
+              {/* Dynamic Technical Specs Grid */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ ...transition, delay: 0.25 }}
+                className="flex items-center justify-center gap-6 md:gap-10 mb-8 border-t border-b border-black/5 py-4 w-full max-w-lg mx-auto flex-wrap"
+                style={{ borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' }}
+              >
+                <div className="flex flex-col items-center">
+                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.year}</span>
+                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Year</span>
+                </div>
+                <div className="h-6 w-[1px]" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)' }} />
+                <div className="flex flex-col items-center">
+                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.condition}</span>
+                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Condition</span>
+                </div>
+                <div className="h-6 w-[1px]" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)' }} />
+                <div className="flex flex-col items-center">
+                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.engine.split(' ')[0]}</span>
+                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Engine</span>
+                </div>
+              </motion.div>
               
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}

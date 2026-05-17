@@ -21,4 +21,6 @@ export interface Car {
   keyFeatures: string[];
   images: string[];
   reviews: CarReview[];
+  video?: string;
 }
+

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export function ParallaxHeroBackground({ 
@@ -8,25 +7,19 @@ export function ParallaxHeroBackground({
 }: { 
   children: React.ReactNode 
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  
-  // Track scroll position relative to this container
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
+  // Track global scroll position — no target ref needed, avoids container positioning issues
+  const { scrollY } = useScroll();
 
-  // Move the background down at half the speed of the scroll
-  // To create a parallax effect
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  // Optional: fade out slightly as we scroll down
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
+  // Parallax: move background down at ~40% of scroll speed
+  const y = useTransform(scrollY, [0, 800], [0, 320]);
+  // Fade out as user scrolls past the hero
+  const opacity = useTransform(scrollY, [0, 600], [1, 0.3]);
 
   return (
-    <div ref={ref} className="absolute inset-0 z-0 overflow-hidden bg-black">
+    <div className="absolute inset-0 z-0 overflow-hidden">
       <motion.div 
-        style={{ y, opacity, width: '100%', height: '100%' }}
-        className="relative w-full h-full transform-gpu"
+        style={{ y, opacity }}
+        className="absolute inset-0 w-full h-full transform-gpu will-change-transform"
       >
         {children}
       </motion.div>
