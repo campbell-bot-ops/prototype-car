@@ -11,7 +11,7 @@ export function Hero() {
       {/* Full-Bleed Cinematic Video — THE CAR IS THE STAR */}
       <ParallaxHeroBackground>
         <video 
-          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/jeep_dgk4g9.mp4"
+          src="https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4"
           autoPlay 
           loop 
           muted 
