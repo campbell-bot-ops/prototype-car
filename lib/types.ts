@@ -22,5 +22,6 @@ export interface Car {
   images: string[];
   reviews: CarReview[];
   video?: string;
+  hotspots?: Array<{ x: number; y: number; label: string; desc: string }>;
 }
 

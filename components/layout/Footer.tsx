@@ -1,9 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Lock } from "lucide-react";
 
 export function Footer() {
+  const handleLock = () => {
+    localStorage.removeItem("showroom_unlocked");
+    window.dispatchEvent(new Event("lock-showroom"));
+  };
+
   return (
     <footer className="bg-surface border-t border-border mt-auto pt-16 pb-8" id="contact">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -50,7 +55,17 @@ export function Footer() {
       
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-widest text-muted uppercase">
         <p>&copy; {new Date().getFullYear()} Vanguard Exotics. All rights reserved.</p>
-        <p>Built for Prestige</p>
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <p>Built for Prestige</p>
+          <button
+            onClick={handleLock}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-background text-[10px] text-muted hover:text-red-500 hover:border-red-500/30 hover:bg-red-50/50 hover:shadow-sm active:scale-95 transition-all duration-300 cursor-pointer"
+            title="Lock Showroom Vault"
+          >
+            <Lock size={11} />
+            <span>Lock Showroom</span>
+          </button>
+        </div>
       </div>
     </footer>
   );

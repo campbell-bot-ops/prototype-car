@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Car } from "@/lib/types";
+import { Cpu, Zap, ShieldCheck } from "lucide-react";
 
 interface CarCardProps {
   car: Car;
@@ -37,6 +38,54 @@ export function CarCard({ car, idx = 0 }: CarCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
         
+        {/* High-Tech X-Ray Telemetry Glass Overlay */}
+        <div className="absolute inset-0 bg-black/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 p-6 flex flex-col justify-between text-white z-20">
+          <div>
+            <span className="text-apple-blue text-[9px] tracking-[0.25em] uppercase font-bold block mb-1">Telemetry / Mechanics</span>
+            <h4 className="font-light text-lg tracking-tight mb-4 border-b border-white/10 pb-2">{car.make} {car.model}</h4>
+            
+            <div className="space-y-3.5">
+              <div className="flex items-center gap-3">
+                <span className="w-6.5 h-6.5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <Cpu size={11} className="text-apple-blue" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40">Drivetrain</span>
+                  <span className="text-[11px] font-light text-white/90">{car.engine}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="w-6.5 h-6.5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <Zap size={11} className="text-apple-blue" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40">Gearbox</span>
+                  <span className="text-[11px] font-light text-white/90">{car.transmission}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="w-6.5 h-6.5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck size={11} className="text-apple-blue" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-[8px] uppercase tracking-widest text-white/40">Chassis Quality</span>
+                  <span className="text-[11px] font-light text-white/90">150-Point Certified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
+            {car.keyFeatures.slice(0, 2).map((feature, fIdx) => (
+              <span key={fIdx} className="text-[8px] tracking-wider uppercase bg-white/5 border border-white/10 px-2.5 py-0.75 rounded text-white/70">
+                {feature}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* Badges */}
         <div className="absolute top-6 left-6 flex gap-2 z-10">
           <span className="bg-white/80 backdrop-blur-md border border-black/5 px-4 py-1.5 text-[10px] tracking-widest uppercase text-black font-light rounded-full shadow-sm">

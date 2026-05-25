@@ -26,13 +26,13 @@ export function AudioIgnition({ engineName = "V12" }: { engineName?: string }) {
       <audio ref={audioRef} preload="auto" src="/freesound_community-car-engine-revving-94831.mp3" />
       <button 
         onClick={startIgnition}
-        className={`flex items-center gap-3 backdrop-blur-md px-6 py-3 rounded-full border transition-all font-light tracking-widest text-xs uppercase ${
+        className={`flex items-center justify-center gap-3 px-8 py-4 w-full sm:w-auto rounded-full text-[10px] uppercase tracking-[0.2em] font-semibold transition-all duration-500 border ${
           isPlaying 
-            ? 'border-apple-blue bg-apple-blue text-white shadow-[0_0_50px_rgba(41,151,255,0.8)] animate-pulse' 
-            : 'border-white/20 bg-black/40 text-white hover:border-white/50 hover:bg-white/10'
+            ? "bg-apple-blue border-apple-blue text-white shadow-[0_0_25px_rgba(0,113,227,0.5)] scale-102" 
+            : "bg-white/5 border-white/10 text-white hover:bg-white hover:text-black hover:scale-105"
         }`}
       >
-        <Power size={18} className={isPlaying ? "text-white" : "text-apple-blue"} />
+        <Power size={14} className={isPlaying ? "text-white animate-pulse" : "text-apple-blue"} />
         {isPlaying ? `${engineName} IGNITED` : `IGNITE ${engineName}`}
       </button>
     </>

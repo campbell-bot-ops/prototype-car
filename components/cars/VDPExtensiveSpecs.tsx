@@ -5,6 +5,46 @@ import Image from "next/image";
 import { Gauge, Settings, Key } from "lucide-react";
 import { Car } from "@/lib/types";
 import { ReviewsSection } from "@/components/interaction/ReviewsSection";
+import { useState } from "react";
+
+// Cursor-Interactive Light-Reflecting Metallic Card Wrapper
+function ReflectingCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`group relative overflow-hidden bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-8 md:p-10 transition-all duration-300 backdrop-blur-md w-full h-full ${className}`}
+    >
+      {/* Dynamic Metallic Light Refraction */}
+      {hovered && (
+        <div 
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+          style={{
+            background: `
+              radial-gradient(300px circle at ${coords.x}px ${coords.y}px, rgba(255,255,255,0.05) 0%, transparent 70%),
+              radial-gradient(180px circle at ${coords.x}px ${coords.y}px, rgba(0,113,227,0.12) 0%, transparent 60%)
+            `
+          }}
+        />
+      )}
+      <div className="relative z-10">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export function VDPExtensiveSpecs({ car }: { car: Car }) {
   const t: any = { duration: 0.8, ease: "easeOut" };
@@ -44,19 +84,23 @@ export function VDPExtensiveSpecs({ car }: { car: Car }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.2}}
-            className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-6 sm:p-8 md:p-10 backdrop-blur-md"
+            className="w-full"
           >
-            <Gauge className="text-white mb-6" size={24} />
-            <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Powertrain</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white">{car.engine}</span>
+            <ReflectingCard>
+              <Gauge className="text-white mb-6" size={24} />
+              <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Powertrain</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">{car.engine}</span>
+            </ReflectingCard>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{...t, delay: 0.3}}
-            className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-6 sm:p-8 md:p-10 backdrop-blur-md"
+            className="w-full"
           >
-            <Settings className="text-white mb-6" size={24} />
-            <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Transmission</span>
-            <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white">{car.transmission}</span>
+            <ReflectingCard>
+              <Settings className="text-white mb-6" size={24} />
+              <span className="block text-[10px] sm:text-xs font-normal uppercase tracking-widest text-[#86868b] mb-2">Transmission</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">{car.transmission}</span>
+            </ReflectingCard>
           </motion.div>
         </div>
       </motion.div>
@@ -85,9 +129,11 @@ export function VDPExtensiveSpecs({ car }: { car: Car }) {
             <motion.div 
               key={idx} 
               initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{...t, delay: 0.1 * idx}}
-              className="bg-white/5 border border-white/10 rounded-[24px] md:rounded-[32px] p-8 flex flex-col justify-center items-center text-center min-h-[160px] md:min-h-[200px] hover:bg-white/10 transition-colors"
+              className="w-full"
             >
-              <span className="text-base sm:text-lg md:text-2xl font-light text-white tracking-tight leading-relaxed">{feature}</span>
+              <ReflectingCard className="flex flex-col justify-center items-center text-center min-h-[160px] md:min-h-[200px]">
+                <span className="text-base sm:text-lg md:text-2xl font-light text-white tracking-tight leading-relaxed">{feature}</span>
+              </ReflectingCard>
             </motion.div>
           ))}
         </div>

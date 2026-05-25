@@ -18,7 +18,12 @@ export const mockCars: Car[] = [
       "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287347/imagem3_j7ywf2.png"
     ],
     video: "https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4",
-    reviews: []
+    reviews: [],
+    hotspots: [
+      { x: 38, y: 70, label: "Digital Light Headlamps", desc: "1.3 million pixels per headlamp projecting warnings directly onto the tarmac." },
+      { x: 55, y: 35, label: "Acoustic Glasshouse", desc: "Acoustically insulated windshield and side panes reducing cabin noise to library levels." },
+      { x: 20, y: 75, label: "48V Mild-Hybrid Grille", desc: "Active shutters optimize thermal efficiency for the 2.0L turbocharged inline-4." }
+    ]
   },
   {
     id: "c-008",
@@ -39,6 +44,11 @@ export const mockCars: Car[] = [
     video: "https://res.cloudinary.com/ddm5ca6u8/video/upload/jeep_dgk4g9.mp4",
     reviews: [
       { id: "cm-005", author: "Alhaji Bello", text: "A nostalgic masterpiece. The restoration quality of the wood-grain dash and Selec-Trac system is pristine.", date: "2024-05-15T10:45:00Z", rating: 5 }
+    ],
+    hotspots: [
+      { x: 28, y: 65, label: "Heritage Grille", desc: "Iconic Chrysler 8-slot chrome grille restored to factory catalog specs." },
+      { x: 52, y: 48, label: "Tan Plaid Weave", desc: "Custom hand-stitched interior reproducing 1989 Pioneer cabin heritage." },
+      { x: 82, y: 72, label: "Pioneer Chrome Package", desc: "Hand-polished original AMC-era badges and side moulding inserts." }
     ]
   },
   {
@@ -59,6 +69,11 @@ export const mockCars: Car[] = [
     ],
     reviews: [
       { id: "cm-001", author: "Chief Adebayo", text: "A truly pristine Cullinan. The delivery was remarkably smooth and the bespoke audio exceeded expectations.", date: "2024-05-10T08:30:00Z", rating: 5 }
+    ],
+    hotspots: [
+      { x: 35, y: 60, label: "Spirit of Ecstasy", desc: "Solid sterling silver Spirit of Ecstasy retractable bonnet sculpture." },
+      { x: 48, y: 82, label: "Magic Carpet Ride", desc: "Self-levelling air suspension performing millions of damping calculations per second." },
+      { x: 75, y: 45, label: "Private Suite", desc: "Immersive seating with integrated champagne chiller and bespoke whiskey decanters." }
     ]
   },
   {

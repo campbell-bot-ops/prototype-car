@@ -1,124 +1,248 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Car } from "@/lib/types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function FeaturedCars({ cars }: { cars: Car[] }) {
-  // Snappy, fast, fluid Apple-like transition
-  const transition: any = { duration: 0.8, ease: "easeOut" };
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const nextCard = () => {
+    setActiveIndex((prev) => (prev + 1) % cars.length);
+  };
+
+  const prevCard = () => {
+    setActiveIndex((prev) => (prev - 1 + cars.length) % cars.length);
+  };
+
+  const handleDragEnd = (event: any, info: any) => {
+    const swipeThreshold = 50; // trigger offset in pixels
+    if (info.offset.x < -swipeThreshold) {
+      nextCard();
+    } else if (info.offset.x > swipeThreshold) {
+      prevCard();
+    }
+  };
+
+  const formatNaira = (amount: number) => {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
   return (
-    <section className="flex flex-col px-3 py-3 w-full relative gap-6">
-      {cars.map((car, idx) => {
-        const isDark = idx % 2 !== 0; 
-        const bgColor = isDark ? "bg-black" : "bg-background";
-        const textColor = isDark ? "text-white" : "text-[#1d1d1f]";
-        const subTextColor = isDark ? "text-[#86868b]" : "text-[#1d1d1f]/70";
+    <section className="flex flex-col py-16 bg-[#09090b] relative w-full overflow-hidden" id="hook">
+      {/* Header */}
+      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span className="text-apple-blue text-[10px] tracking-[0.4em] uppercase font-bold block mb-3">Vanguard Editorial</span>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-white leading-none">Featured Collections</h2>
+          <p className="text-white/30 text-[10px] uppercase tracking-widest mt-2 block">Swipe or tap a card to cycle the fleet</p>
+        </div>
 
-        return (
-          <motion.div 
-            key={car.id} 
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={transition}
-            className={`relative w-full h-[95vh] md:h-[100dvh] ${bgColor} rounded-[32px] md:rounded-[40px] overflow-hidden flex flex-col items-center justify-start pt-16 md:pt-24`}
+        {/* Previous / Next Controls */}
+        <div className="flex gap-2">
+          <button
+            onClick={prevCard}
+            className="w-12 h-12 rounded-full border border-white/10 hover:border-white/25 text-white/50 hover:text-white flex items-center justify-center transition-all bg-white/[0.02] active:scale-95"
+            aria-label="Previous Slide"
           >
-            <div className="relative z-20 flex flex-col items-center text-center px-4 w-full max-w-4xl mx-auto flex-shrink-0">
-              <motion.h2 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...transition, delay: 0.1 }}
-                className={`font-bold text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-none tracking-tight mb-4 bg-gradient-to-b ${
-                  car.id === "c-007" ? "from-[#0f172a] via-[#334155] to-[#64748b]" : // GLC300
-                  car.id === "c-008" ? "from-[#fef08a] via-[#f59e0b] to-[#ca8a04]" : // Jeep Pioneer
-                  car.id === "c-001" ? "from-[#1e293b] via-[#475569] to-[#64748b]" : // Cullinan
-                  isDark ? "from-white via-white/90 to-white/70" : "from-[#1d1d1f] via-[#1d1d1f]/90 to-[#1d1d1f]/70"
-                } bg-clip-text text-transparent`}
-              >
-                {car.make} <br className="md:hidden" /> {car.model}
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...transition, delay: 0.2 }}
-                className={`text-base sm:text-lg md:text-3xl font-medium tracking-tight mb-6 px-4 ${subTextColor}`}
-              >
-                {car.keyFeatures[0] || 'Unparalleled luxury and performance.'}
-              </motion.p>
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={nextCard}
+            className="w-12 h-12 rounded-full border border-white/10 hover:border-white/25 text-white/50 hover:text-white flex items-center justify-center transition-all bg-white/[0.02] active:scale-95"
+            aria-label="Next Slide"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
 
-              {/* Dynamic Technical Specs Grid */}
+      {/* Overlapping Deck Stack Container */}
+      <div className="relative w-full h-[55vh] min-h-[420px] max-h-[550px] flex items-center justify-center px-6 mb-8 select-none">
+        <div className="relative w-full max-w-[1200px] h-full flex items-center justify-center">
+          
+          {cars.map((car, idx) => {
+            // Find difference to determine offset positioning
+            let diff = idx - activeIndex;
+            
+            // Handle wrap-around so cards loop infinitely in the stack
+            if (diff < -1) diff += cars.length;
+            if (diff > cars.length - 2) diff -= cars.length;
+
+            const isActive = diff === 0;
+            const isNext = diff === 1;
+            const isPassed = diff === -1;
+            
+            // Only render active, next, and passed cards to maintain clean performance
+            const shouldRender = isActive || isNext || isPassed;
+            if (!shouldRender) return null;
+
+            // Compute custom offset styles based on stack order
+            let zIndex = 10;
+            let translateX = 0;
+            let scale = 0.85;
+            let opacity = 0;
+            let rotate = 0;
+
+            if (isActive) {
+              zIndex = 30;
+              translateX = 0;
+              scale = 1;
+              opacity = 1;
+              rotate = 0;
+            } else if (isNext) {
+              zIndex = 20;
+              // Shift to the right (use pre-computed isMobile state to completely bypass browser reflow!)
+              translateX = isMobile ? 40 : 200;
+              scale = 0.9;
+              opacity = 0.55;
+              rotate = isMobile ? 0 : 2; // Disable expensive rotations on mobile GPUs
+            } else if (isPassed) {
+              zIndex = 10;
+              // Shift to the left
+              translateX = isMobile ? -40 : -200;
+              scale = 0.9;
+              opacity = 0.0; // prepped but hidden
+              rotate = isMobile ? 0 : -2;
+            }
+
+            return (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...transition, delay: 0.25 }}
-                className="flex items-center justify-center gap-6 md:gap-10 mb-8 border-t border-b border-black/5 py-4 w-full max-w-lg mx-auto flex-wrap"
-                style={{ borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)' }}
+                key={car.id}
+                onClick={() => {
+                  if (!isActive) {
+                    setActiveIndex(idx);
+                  }
+                }}
+                drag={isActive ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.3} // Tactile swipe resistance
+                onDragEnd={isActive ? handleDragEnd : undefined}
+                animate={{
+                  x: translateX,
+                  scale: scale,
+                  opacity: opacity,
+                  rotate: rotate,
+                }}
+                transition={{
+                  type: "tween",
+                  ease: [0.16, 1, 0.3, 1], // snappiest compositor cubic-bezier
+                  duration: 0.45
+                }}
+                style={{ 
+                  zIndex,
+                  willChange: "transform, opacity" // promoting element to a dedicated GPU layering block
+                }}
+                className={`absolute w-[85vw] sm:w-[65vw] md:w-[55vw] lg:w-[66vw] xl:w-[60vw] h-[48vh] sm:h-[52vh] lg:h-[64vh] min-h-[380px] lg:min-h-[480px] max-h-[580px] rounded-[24px] md:rounded-[32px] overflow-hidden flex flex-col justify-between p-6 md:p-10 transition-colors border cursor-pointer ${
+                  isActive 
+                    ? "bg-[#0f0f11] border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.5)] touch-pan-y" 
+                    : "bg-[#18181c] border-white/5 opacity-60 hover:opacity-85 shadow-md"
+                }`}
               >
-                <div className="flex flex-col items-center">
-                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.year}</span>
-                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Year</span>
-                </div>
-                <div className="h-6 w-[1px]" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)' }} />
-                <div className="flex flex-col items-center">
-                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.condition}</span>
-                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Condition</span>
-                </div>
-                <div className="h-6 w-[1px]" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)' }} />
-                <div className="flex flex-col items-center">
-                  <span className={`font-semibold text-sm md:text-lg ${isDark ? 'text-white' : 'text-black'}`}>{car.engine.split(' ')[0]}</span>
-                  <span className={`text-[9px] md:text-[10px] tracking-[0.2em] uppercase ${isDark ? 'text-white/40' : 'text-[#1d1d1f]/50'}`}>Engine</span>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ ...transition, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full px-4 sm:w-auto"
-              >
-                <Link 
-                  href={`/inventory/${car.id}`} 
-                  className={`w-full sm:w-auto px-8 py-4 ${isDark ? 'bg-white text-black hover:bg-surface' : 'bg-[#1d1d1f] text-white hover:bg-black'} rounded-full font-semibold text-[15px] md:text-[17px] transition-colors shadow-sm text-center`}
-                >
-                  Acquire Now
-                </Link>
-                <Link 
-                  href={`/inventory/${car.id}`} 
-                  className={`w-full sm:w-auto px-8 py-4 ${isDark ? 'text-white border-white/20 hover:bg-white/10' : 'text-[#1d1d1f] border-black/10 hover:bg-black/5'} border rounded-full font-semibold text-[15px] md:text-[17px] transition-colors text-center`}
-                >
-                  View Details
-                </Link>
-              </motion.div>
-            </div>
+                {/* Card Header Content */}
+                <div className="relative z-20 flex justify-between items-start w-full">
+                  <div className="flex flex-col">
+                    <span className="px-2.5 py-0.5 rounded-full bg-apple-blue/20 text-apple-blue text-[8px] uppercase tracking-widest font-bold border border-apple-blue/25 w-max mb-3">
+                      {idx === 0 ? "New" : "Certified"}
+                    </span>
+                    <span className="text-[10px] text-white/40 tracking-[0.2em] uppercase font-bold block mb-1">
+                      {car.year} • {car.condition}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-white leading-tight">
+                      {car.make} <br />
+                      <span className="text-white/60 font-serif font-light">{car.model}</span>
+                    </h3>
+                  </div>
 
-            {/* Massive Full-Width Absolute Image with slight scale reveal */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 1.05, y: 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ ...transition, duration: 1.2 }}
-              className="absolute bottom-0 left-0 w-full h-[60%] md:h-[75%] lg:h-[80%] pointer-events-none"
-            >
-              <Image 
-                src={car.images[0]} 
-                alt={car.model}
-                fill
-                sizes="100vw"
-                className="object-cover object-bottom"
-                priority={idx === 0}
-              />
-              <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-black/10 via-transparent to-black' : 'from-background/10 via-transparent to-background'}`} />
-            </motion.div>
-          </motion.div>
-        );
-      })}
+                  {/* High-Fashion Outline counter */}
+                  <span className="text-3xl md:text-4xl font-mono text-white/5 select-none font-bold">
+                    0{idx + 1}
+                  </span>
+                </div>
+
+                {/* Overlap Tint Filter Card Mask — perpetual solid shade to avoid expensive live blurs on mobile */}
+                <div 
+                  className="absolute inset-0 bg-[#09090b]/55 z-10 rounded-[24px] md:rounded-[32px] transition-all duration-300 pointer-events-none"
+                  style={{ 
+                    opacity: isActive ? 0 : 1,
+                  }}
+                />
+
+                {/* Card Footer Detail Panel */}
+                <div className={`relative z-20 w-full border-t border-white/5 pt-4 transition-all duration-500 flex items-center justify-between ${
+                  isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-white tracking-tight">{formatNaira(car.priceNaira)}</span>
+                    <span className="text-[7px] tracking-[0.2em] uppercase text-white/30 font-bold mt-0.5">{car.engine.split(' ')[0]} • {car.transmission.split(' ')[0]}</span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/inventory/${car.id}`}
+                      className="px-4 py-2 bg-white text-black hover:bg-white/95 rounded-full font-bold text-[8px] uppercase tracking-[0.15em] transition-all duration-300"
+                    >
+                      Acquire
+                    </Link>
+                    <Link
+                      href={`/inventory/${car.id}`}
+                      className="px-4 py-2 border border-white/10 hover:border-white/25 hover:bg-white/5 text-white rounded-full font-bold text-[8px] uppercase tracking-[0.15em] transition-all duration-300"
+                    >
+                      Explore
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Immersive Car Media Image Background */}
+                <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden rounded-[24px] md:rounded-[32px] flex items-center justify-center">
+                  <Image
+                    src={car.images[0]}
+                    alt={car.model}
+                    fill
+                    sizes="(max-width: 768px) 85vw, 48vw"
+                    className={`object-cover object-center transition-all duration-1000 rounded-[24px] md:rounded-[32px] ${
+                      isActive ? "opacity-45 scale-100" : "opacity-25 scale-105 saturate-50"
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-90 rounded-[24px] md:rounded-[32px]" />
+                </div>
+              </motion.div>
+            );
+          })}
+
+        </div>
+      </div>
+
+      {/* Progress Dots Indicators */}
+      <div className="flex justify-center gap-1.5 w-full">
+        {cars.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveIndex(idx)}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              activeIndex === idx ? "w-8 bg-apple-blue" : "w-1.5 bg-white/15 hover:bg-white/30"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
     </section>
   );
 }

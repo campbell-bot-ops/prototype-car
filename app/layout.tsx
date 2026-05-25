@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StudioLightingToggle } from "@/components/layout/StudioLightingToggle";
+import { PasskeyGuard } from "@/components/layout/PasskeyGuard";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -23,15 +25,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans font-light tracking-tight">
-        <Navbar />
-        <StudioLightingToggle />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <PasskeyGuard>
+          <Navbar />
+          <StudioLightingToggle />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </PasskeyGuard>
       </body>
     </html>
   );

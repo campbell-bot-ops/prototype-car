@@ -6,10 +6,19 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Play, Maximize, Rotate3D } from "lucide-react";
 
-export function Gallery({ images, video }: { images: string[]; video?: string }) {
+export function Gallery({ 
+  images, 
+  video, 
+  hotspots 
+}: { 
+  images: string[]; 
+  video?: string; 
+  hotspots?: Array<{ x: number; y: number; label: string; desc: string }>
+}) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<"photos" | "360" | "video">("photos");
   const [inlineIndex, setInlineIndex] = useState(0);
+  const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
 
   // Avoid scrolling the underlying page when fullscreen modal is open
   if (typeof document !== 'undefined') {
@@ -188,6 +197,43 @@ export function Gallery({ images, video }: { images: string[]; video?: string })
                   />
                 </motion.div>
               </AnimatePresence>
+              
+              {/* Interactive Hotspots Overlay (Only visible on primary photo, inlineIndex === 0) */}
+              {inlineIndex === 0 && hotspots && hotspots.map((spot, idx) => (
+                <div 
+                  key={idx}
+                  className="absolute z-[25] transition-all"
+                  style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+                >
+                  {/* Pulsating Trigger Dot */}
+                  <button
+                    onMouseEnter={() => setActiveHotspot(idx)}
+                    onMouseLeave={() => setActiveHotspot(null)}
+                    onClick={() => setActiveHotspot(activeHotspot === idx ? null : idx)}
+                    className="relative w-8 h-8 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center group focus:outline-none cursor-pointer"
+                  >
+                    <span className="absolute w-6 h-6 rounded-full bg-apple-blue/40 animate-ping" />
+                    <span className="relative w-3.5 h-3.5 rounded-full bg-white border-2 border-apple-blue shadow-[0_0_12px_#0071e3] transition-all group-hover:scale-125" />
+                  </button>
+
+                  {/* Elegant Glass Popover Card */}
+                  <AnimatePresence>
+                    {activeHotspot === idx && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                        transition={{ duration: 0.25 }}
+                        className="absolute bottom-6 left-1/2 -translate-x-1/2 w-64 bg-black/90 backdrop-blur-md border border-white/10 p-4 rounded-2xl shadow-2xl text-left pointer-events-none z-[99]"
+                      >
+                        <span className="text-apple-blue text-[8px] uppercase tracking-widest font-bold block mb-1">Craftsmanship</span>
+                        <h5 className="text-white text-xs font-semibold tracking-tight mb-1.5">{spot.label}</h5>
+                        <p className="text-white/60 text-[10px] leading-relaxed font-light">{spot.desc}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
             </div>
 
             {selectedIndex < images.length - 1 && (

@@ -2,6 +2,8 @@ import { mockCars } from "@/lib/mockData";
 import { Gallery } from "@/components/cars/Gallery";
 import { VDPExtensiveSpecs } from "@/components/cars/VDPExtensiveSpecs";
 import { AudioIgnition } from "@/components/interaction/AudioIgnition";
+import { AudioWalkthrough } from "@/components/interaction/AudioWalkthrough";
+import { VDPBookingHeroActions } from "@/components/interaction/VDPBookingHeroActions";
 import Image from "next/image";
 import ClientVDP from "./ClientVDP";
 import { ParallaxHeroBackground } from "@/components/interaction/ParallaxHeroBackground";
@@ -33,7 +35,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
     <div className="min-h-screen bg-black text-[#f5f5f7] pb-24 overflow-x-hidden">
       {/* Apple Pro Immersive Dark Header */}
       <div className="relative h-[100dvh] min-h-[700px] w-full flex flex-col items-center justify-start pt-32 overflow-hidden mb-16 border-b-8 border-white/10">
-        <div className="relative z-20 flex flex-col items-center text-center px-6">
+        <div className="relative z-20 flex flex-col items-center text-center px-6 w-full max-w-5xl mx-auto">
           <h2 className="text-apple-blue font-normal tracking-widest uppercase text-xs md:text-sm mb-4">
             {car.make} • {car.year}
           </h2>
@@ -46,8 +48,19 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
           <div className="flex gap-4 mt-2 mb-4 max-w-full overflow-hidden">
             <span className="text-2xl sm:text-4xl md:text-5xl font-light tracking-tight text-apple-blue drop-shadow-md truncate">{formatNaira(car.priceNaira)}</span>
           </div>
-          <div className="mt-8 z-30">
+          <div className="mt-8 z-30 flex flex-col items-center justify-center gap-4 w-full px-4">
+            <VDPBookingHeroActions car={car} />
+            <div className="h-[1px] w-24 bg-white/10 my-3" />
             <AudioIgnition engineName={car.engine} />
+            <AudioWalkthrough 
+              year={car.year} 
+              make={car.make} 
+              model={car.model} 
+              engine={car.engine} 
+              transmission={car.transmission} 
+              condition={car.condition} 
+              keyFeatures={car.keyFeatures} 
+            />
           </div>
         </div>
 
@@ -70,7 +83,7 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         
         {/* Gallery */}
         <div className="mb-16">
-          <Gallery images={car.images} video={car.video} />
+          <Gallery images={car.images} video={car.video} hotspots={car.hotspots} />
         </div>
 
         <div className="flex flex-col xl:grid xl:grid-cols-3 gap-16">

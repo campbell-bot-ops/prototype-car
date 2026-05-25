@@ -60,24 +60,7 @@ export default function ClientVDP({ car }: { car: Car }) {
         </div>
       </div>
 
-      {/* Mobile Sticky Footer CTA - Portaled to Body for guaranteed fixed positioning */}
-      {mounted && createPortal(
-        <div className="fixed bottom-0 left-0 right-0 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] bg-[#0a0a0a]/95 backdrop-blur-3xl border-t border-white/10 md:hidden z-[9999] flex items-center justify-between gap-6">
-          <div className="flex flex-col">
-            <span className="text-[10px] text-[#86868b] uppercase tracking-[0.2em] mb-1 font-medium">Price</span>
-            <span className="text-base font-light text-white tracking-tight">
-              {new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(car.priceNaira)}
-            </span>
-          </div>
-          <button 
-            onClick={() => setIsBookingOpen(true)}
-            className="flex-1 bg-white text-black py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.15em] active:scale-95 transition-transform"
-          >
-            Book Inspection
-          </button>
-        </div>,
-        document.body
-      )}
+
 
       <BookingModal car={car} isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>

@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { TheHook } from "@/components/home/TheHook";
+import { IgnitionSoundboard } from "@/components/home/IgnitionSoundboard";
 import { FeaturedCars } from "@/components/home/FeaturedCars";
 import { mockCars } from "@/lib/mockData";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-surface">
       <Hero />
       <TheHook />
+      <IgnitionSoundboard />
       
       {/* Apple Style Stacked Full-Bleed Feature Sections */}
       <FeaturedCars cars={featuredCars} />
