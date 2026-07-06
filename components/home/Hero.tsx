@@ -32,7 +32,7 @@ export function Hero() {
         {/* Full-Bleed Cinematic Video — THE CAR IS THE STAR */}
         <ParallaxHeroBackground>
           <video 
-            src="https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4"
+            src="/WhatsApp Video 2026-06-30 at 19.33.38.mp4"
             autoPlay 
             loop 
             muted 

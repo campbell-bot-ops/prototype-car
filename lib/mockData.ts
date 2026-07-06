@@ -17,7 +17,7 @@ export const mockCars: Car[] = [
       "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287163/imagem2_orx6jh.png",
       "https://res.cloudinary.com/ddm5ca6u8/image/upload/v1778287347/imagem3_j7ywf2.png"
     ],
-    video: "https://res.cloudinary.com/ddm5ca6u8/video/upload/newhh_tgmqr0.mp4",
+    video: "/WhatsApp Video 2026-06-30 at 19.33.38.mp4",
     reviews: [],
     hotspots: [
       { x: 38, y: 70, label: "Digital Light Headlamps", desc: "1.3 million pixels per headlamp projecting warnings directly onto the tarmac." },
